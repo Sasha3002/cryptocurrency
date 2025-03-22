@@ -1,0 +1,18 @@
+FROM node:14
+
+WORKDIR /usr/src/frontend
+
+COPY package.json ./
+COPY package-lock.json ./
+
+RUN npm install
+
+COPY . /usr/src/frontend
+
+RUN npm run build
+
+RUN npm install -g serve
+
+EXPOSE 3000
+
+CMD npm start --host 0.0.0.0 --port 3000 --disableHostCheck true
